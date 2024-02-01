@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Forecast from "../Forecast/Forecast";
 import Search from "../Search/Search";
 
 const Weather = () => {
@@ -14,6 +15,7 @@ const Weather = () => {
     if (search === "") {
       alert(`You can't submit an empty field. Please type a city!`);
     }
+    //Weather
     fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
       .then((response) => response.json())
       .catch((err) => console.log(err))
@@ -44,6 +46,11 @@ const Weather = () => {
         </form>
       </div>
       <p>
+        {weatherConditions.coord === undefined
+          ? null
+          : `${weatherConditions.coord.lon}, ${weatherConditions.coord.lat}`}
+      </p>
+      <p>
         {weatherConditions.sys === undefined
           ? null
           : `${weatherConditions.name}, ${weatherConditions.sys.country}`}
@@ -63,6 +70,7 @@ const Weather = () => {
           ? null
           : `(${weatherConditions.weather[0].description})`}
       </p>
+      <Forecast coords={weatherConditions.coord} />
     </div>
   );
 };
