@@ -12,14 +12,10 @@ Run:
 
 ## 3) Downloaad all required packages
 Run:
-### `npm install or npm i`
+### `npm install`
 
-## 4) To open project folder in code editor
-In terminal run:
-### `code . or other way`
-
-## 5) Start a project
-Open terminal in code editor and run:
+## 4) Start a project
+Run:
 ### `npm start`
 
 Runs the app in the development mode.\
