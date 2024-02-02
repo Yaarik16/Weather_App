@@ -10,6 +10,7 @@ const Weather = () => {
 
   const [search, setSearch] = useState("");
   const [weatherConditions, setWeatherConditions] = useState({});
+  const [forecastSwitch, setForecastSwitch] = useState(false);
 
   const searchPressed = () => {
     if (search === "") {
@@ -19,6 +20,7 @@ const Weather = () => {
     fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
       .then((response) => response.json())
       .catch((err) => console.log(err))
+      .then(setForecastSwitch(false))
       .then((result) => {
         console.log(result);
         setWeatherConditions(result);
@@ -70,7 +72,13 @@ const Weather = () => {
           ? null
           : `(${weatherConditions.weather[0].description})`}
       </p>
-      <Forecast coords={weatherConditions.coord} />
+      {weatherConditions.weather === undefined ? null : (
+        <Forecast
+          trigger={forecastSwitch}
+          setTrigger={setForecastSwitch}
+          coords={weatherConditions.coord}
+        />
+      )}
     </div>
   );
 };
