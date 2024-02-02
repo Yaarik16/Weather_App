@@ -14,8 +14,8 @@ Run:
 Run:
 ### `npm install or npm i`
 
-## 4) Open project folder in code editor
-Run:
+## 4) To open project folder in code editor
+In terminal run:
 ### `code . or other way`
 
 ## 5) Start a project
