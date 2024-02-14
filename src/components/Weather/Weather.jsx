@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { BiSearchAlt2 } from "react-icons/bi";
+import sunicon from "../../icons/sun.png";
 import Forecast from "../Forecast/Forecast";
 import Search from "../Search/Search";
+import SearchWeather from "../Search/SearchWeather";
+import "./Weather.css";
 
 const Weather = () => {
   const api = {
     key: "5459771b5760c101a1b553114f3086d4",
     base: "https://api.openweathermap.org/data/2.5/",
   };
-
   const [search, setSearch] = useState("");
   const [weatherConditions, setWeatherConditions] = useState({});
   const [forecastSwitch, setForecastSwitch] = useState(false);
@@ -33,52 +36,54 @@ const Weather = () => {
   };
 
   return (
-    <div>
+    <div className="weather-container">
       {/* <Search onSearchChange={handleOnSearchChange} /> */}
 
-      <div>
-        <form onSubmit={handleSubmit}>
+      <div className="search-container">
+        <form className="search-form" onSubmit={handleSubmit}>
           <input
+            className="search-input"
             type="text"
             placeholder="Search for city..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button onClick={searchPressed}>Search</button>
+          <button className="search-btn" onClick={searchPressed}>
+            <BiSearchAlt2 className="search-icon" />
+          </button>
         </form>
+        <div className="search-container">
+          <SearchWeather allWeather={weatherConditions} />
+        </div>
       </div>
-      <p>
-        {weatherConditions.coord === undefined
-          ? null
-          : `${weatherConditions.coord.lon}, ${weatherConditions.coord.lat}`}
-      </p>
-      <p>
-        {weatherConditions.sys === undefined
-          ? null
-          : `${weatherConditions.name}, ${weatherConditions.sys.country}`}
-      </p>
-      <p>
-        {weatherConditions.main === undefined
-          ? null
-          : ` ${Math.round(weatherConditions.main.temp)}°C`}
-      </p>
-      <p>
-        {weatherConditions.weather === undefined
-          ? null
-          : `${weatherConditions.weather[0].main}`}
-      </p>
-      <p>
-        {weatherConditions.weather === undefined
-          ? null
-          : `(${weatherConditions.weather[0].description})`}
-      </p>
-      {weatherConditions.weather === undefined ? null : (
-        <Forecast
-          trigger={forecastSwitch}
-          setTrigger={setForecastSwitch}
-          coords={weatherConditions.coord}
-        />
-      )}
+      <div className="forecast-container">
+        <p>
+          {weatherConditions.coord === undefined
+            ? null
+            : `${weatherConditions.coord.lon}, ${weatherConditions.coord.lat}`}
+        </p>
+        <p>
+          {weatherConditions.sys === undefined
+            ? null
+            : `${new Date(
+                weatherConditions.sys.sunrise * 1000
+              ).toLocaleTimeString("en-US")}, ${new Date(
+                weatherConditions.sys.sunset * 1000
+              ).toLocaleTimeString("en-US")}`}
+        </p>
+        <p>
+          {weatherConditions.weather === undefined
+            ? null
+            : `(${weatherConditions.weather[0].description})`}
+        </p>
+        {weatherConditions.weather === undefined ? null : (
+          <Forecast
+            trigger={forecastSwitch}
+            setTrigger={setForecastSwitch}
+            coords={weatherConditions.coord}
+          />
+        )}
+      </div>
     </div>
   );
 };
