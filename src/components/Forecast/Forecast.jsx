@@ -1,33 +1,58 @@
 import React, { useState } from "react";
-const api = {
-  key: "5459771b5760c101a1b553114f3086d4",
-  base: "https://api.openweathermap.org/data/2.5/",
-};
+import "./Forecast.css";
+import ForecastItem from "./ForecastItem";
 
 const Forecast = (props) => {
-  const [forecast, setForcast] = useState({});
-  const forcastPressed = () => {
+  const [forecast, setForecast] = useState({});
+  const [forecastArray, setForecastArray] = useState([]);
+
+  const forecastPressed = () => {
     // Forecast
     fetch(
-      `${api.base}forecast?lat=${
+      `${props.api.base}forecast?lat=${
         props.coords === undefined ? null : props.coords.lat
       }&lon=${
         props.coords === undefined ? null : props.coords.lon
-      }&units=metric&appid=${api.key}`
+      }&units=metric&appid=${props.api.key}`
     )
       .then((response) => response.json())
-      .then(props.setTrigger(true))
       .then((result) => {
+        const newForecastArray = [];
+        for (let i = 0; i <= 6; i++) {
+          newForecastArray.push(result.list[i]);
+        }
+        setForecast(result);
+        setForecastArray(newForecastArray);
+        props.setTrigger(true);
+        console.log(newForecastArray);
         console.log(result);
-        setForcast(result);
       });
   };
 
   return props.trigger ? (
-    <p>Forecast for 7 days</p>
+    <div className="forecast">
+      <div className="forecast-top-panel">
+        <div className="forecast-title">Day Forecast</div>
+        <div className="change-temp-units">
+          <button className="change-units-btn">°C</button>
+          <button className="change-units-btn">°F</button>
+        </div>
+      </div>
+      <div className="forecast-wrapper">
+        {forecastArray.length ? (
+          forecastArray.map((item, index) => {
+            return <ForecastItem key={index} item={item} />;
+          })
+        ) : (
+          <p>There are no items</p>
+        )}
+      </div>
+    </div>
   ) : (
-    <div>
-      <button onClick={forcastPressed}>Load Forecast</button>
+    <div className="forecast-btn-wrapper">
+      <button className="forecast-btn" onClick={forecastPressed}>
+        Load Day Forecast
+      </button>
     </div>
   );
 };

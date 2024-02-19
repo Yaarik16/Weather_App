@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import sunicon from "../../icons/sun.png";
+import sunicon from "../../icons/night.svg";
 import "./../Weather/Weather.css";
 
 const SearchWeather = (props) => {
-  const api = {
-    key: "5459771b5760c101a1b553114f3086d4",
-    base: "https://api.openweathermap.org/data/2.5/",
-  };
-
   const [day, setDay] = useState("");
   const [dayTime, setDayTime] = useState("");
 

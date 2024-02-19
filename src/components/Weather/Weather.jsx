@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-import sunicon from "../../icons/sun.png";
 import Forecast from "../Forecast/Forecast";
 import Search from "../Search/Search";
 import SearchWeather from "../Search/SearchWeather";
@@ -57,32 +56,51 @@ const Weather = () => {
         </div>
       </div>
       <div className="forecast-container">
-        <p>
-          {weatherConditions.coord === undefined
-            ? null
-            : `${weatherConditions.coord.lon}, ${weatherConditions.coord.lat}`}
-        </p>
-        <p>
-          {weatherConditions.sys === undefined
-            ? null
-            : `${new Date(
-                weatherConditions.sys.sunrise * 1000
-              ).toLocaleTimeString("en-US")}, ${new Date(
-                weatherConditions.sys.sunset * 1000
-              ).toLocaleTimeString("en-US")}`}
-        </p>
-        <p>
-          {weatherConditions.weather === undefined
-            ? null
-            : `(${weatherConditions.weather[0].description})`}
-        </p>
-        {weatherConditions.weather === undefined ? null : (
-          <Forecast
-            trigger={forecastSwitch}
-            setTrigger={setForecastSwitch}
-            coords={weatherConditions.coord}
-          />
-        )}
+        <div className="day-hightlights">
+          {weatherConditions.sys === undefined ? null : (
+            <div className="day-title">Today's hightlights</div>
+          )}
+          <div
+            className={
+              weatherConditions.sys === undefined ? "day-info-off" : "day-info"
+            }
+          >
+            <div className="day-item">
+              {weatherConditions.sys === undefined
+                ? null
+                : `${new Date(
+                    weatherConditions.sys.sunrise * 1000
+                  ).toLocaleTimeString("en-US")}, ${new Date(
+                    weatherConditions.sys.sunset * 1000
+                  ).toLocaleTimeString("en-US")}`}
+            </div>
+            <div className="day-item">
+              {weatherConditions.main === undefined
+                ? null
+                : `Pressure: ${weatherConditions.main.pressure}`}
+            </div>
+            <div className="day-item">
+              {weatherConditions.main === undefined
+                ? null
+                : `Humidity: ${weatherConditions.main.humidity}%`}
+            </div>
+            <div className="day-item">
+              {weatherConditions.wind === undefined
+                ? null
+                : `Wind speed: ${weatherConditions.wind.speed}m/s`}
+            </div>
+          </div>
+        </div>
+        <div className="week-forecast">
+          {weatherConditions.weather === undefined ? null : (
+            <Forecast
+              trigger={forecastSwitch}
+              setTrigger={setForecastSwitch}
+              coords={weatherConditions.coord}
+              api={api}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
