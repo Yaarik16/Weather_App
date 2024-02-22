@@ -55,7 +55,11 @@ const SearchWeather = (props) => {
           <p>
             {props.allWeather.sys === undefined
               ? null
-              : `${props.allWeather.name}, ${props.allWeather.sys.country}`}
+              : `${props.allWeather.name}${
+                  props.allWeather.sys.country === undefined
+                    ? ""
+                    : ", " + props.allWeather.sys.country
+                }`}
           </p>
         </div>
       </div>

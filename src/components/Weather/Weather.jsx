@@ -3,6 +3,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import Forecast from "../Forecast/Forecast";
 import Search from "../Search/Search";
 import SearchWeather from "../Search/SearchWeather";
+import humidity_icon from "./../../icons/humidity-icon.png";
 import "./Weather.css";
 
 const Weather = () => {
@@ -16,7 +17,7 @@ const Weather = () => {
 
   const searchPressed = () => {
     if (search === "") {
-      alert(`You can't submit an empty field. Please type a city!`);
+      alert(`You can't submit an empty field. Please type the city name!`);
     }
     //Weather
     fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
@@ -79,10 +80,16 @@ const Weather = () => {
                 ? null
                 : `Pressure: ${weatherConditions.main.pressure}`}
             </div>
-            <div className="day-item">
-              {weatherConditions.main === undefined
-                ? null
-                : `Humidity: ${weatherConditions.main.humidity}%`}
+            <div className="day-item-humidity">
+              {weatherConditions.main === undefined ? null : (
+                <>
+                  <div className="humidity-title">
+                    <p>Humidity</p>
+                  </div>
+                  <img src={humidity_icon} alt="" />
+                  <p className="humidity">{`${weatherConditions.main.humidity}%`}</p>
+                </>
+              )}
             </div>
             <div className="day-item">
               {weatherConditions.wind === undefined
