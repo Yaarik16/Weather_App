@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
+import logo from "../../icons//logo-2.svg";
 import Forecast from "../Forecast/Forecast";
 import Search from "../Search/Search";
 import SearchWeather from "../Search/SearchWeather";
@@ -56,59 +57,73 @@ const Weather = () => {
           <SearchWeather allWeather={weatherConditions} />
         </div>
       </div>
-      <div className="forecast-container">
-        <div className="day-hightlights">
-          {weatherConditions.sys === undefined ? null : (
-            <div className="day-title">Today's hightlights</div>
-          )}
-          <div
-            className={
-              weatherConditions.sys === undefined ? "day-info-off" : "day-info"
-            }
-          >
-            <div className="day-item">
-              {weatherConditions.sys === undefined
-                ? null
-                : `${new Date(
-                    weatherConditions.sys.sunrise * 1000
-                  ).toLocaleTimeString("en-US")}, ${new Date(
-                    weatherConditions.sys.sunset * 1000
-                  ).toLocaleTimeString("en-US")}`}
-            </div>
-            <div className="day-item">
-              {weatherConditions.main === undefined
-                ? null
-                : `Pressure: ${weatherConditions.main.pressure}`}
-            </div>
-            <div className="day-item-humidity">
-              {weatherConditions.main === undefined ? null : (
-                <>
-                  <div className="humidity-title">
-                    <p>Humidity</p>
-                  </div>
-                  <img src={humidity_icon} alt="" />
-                  <p className="humidity">{`${weatherConditions.main.humidity}%`}</p>
-                </>
-              )}
-            </div>
-            <div className="day-item">
-              {weatherConditions.wind === undefined
-                ? null
-                : `Wind speed: ${weatherConditions.wind.speed}m/s`}
-            </div>
+      {weatherConditions.weather === undefined ? (
+        <div className="forecast-container-off-wrapper">
+          <img src={logo} alt="" />
+          <div className="forecast-container-off">
+            ExactWeather.com is your premier destination for accurate and
+            reliable weather forecasts, providing you with the essential
+            information you need to plan your day and week.
           </div>
         </div>
-        <div className="week-forecast">
-          {weatherConditions.weather === undefined ? null : (
-            <Forecast
-              trigger={forecastSwitch}
-              setTrigger={setForecastSwitch}
-              coords={weatherConditions.coord}
-              api={api}
-            />
-          )}
+      ) : (
+        <div className="forecast-container">
+          <div className="day-hightlights">
+            {weatherConditions.sys === undefined ? null : (
+              <div className="day-title">Today's hightlights</div>
+            )}
+            <div
+              className={
+                weatherConditions.sys === undefined
+                  ? "day-info-off"
+                  : "day-info"
+              }
+            >
+              <div className="day-item-sunset">
+                {weatherConditions.sys === undefined
+                  ? null
+                  : `${new Date(
+                      weatherConditions.sys.sunrise * 1000
+                    ).toLocaleTimeString("en-US")}, ${new Date(
+                      weatherConditions.sys.sunset * 1000
+                    ).toLocaleTimeString("en-US")}`}
+              </div>
+              <div className="day-item-presure">
+                {weatherConditions.main === undefined
+                  ? null
+                  : `Pressure: ${weatherConditions.main.pressure}`}
+              </div>
+              <div className="day-item-humidity">
+                {weatherConditions.main === undefined ? null : (
+                  <>
+                    <div className="humidity-title">
+                      <p>Humidity</p>
+                    </div>
+                    <img src={humidity_icon} alt="" />
+                    <p className="humidity">{`${weatherConditions.main.humidity}%`}</p>
+                  </>
+                )}
+              </div>
+              <div className="day-item-wind">
+                {weatherConditions.wind === undefined
+                  ? null
+                  : `Wind speed: ${weatherConditions.wind.speed}m/s`}
+              </div>
+            </div>
+          </div>
+          <div className="week-forecast">
+            {weatherConditions.weather === undefined ? null : (
+              <Forecast
+                trigger={forecastSwitch}
+                setTrigger={setForecastSwitch}
+                coords={weatherConditions.coord}
+                weatherConditions={weatherConditions}
+                api={api}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

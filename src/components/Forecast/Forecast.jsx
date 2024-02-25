@@ -19,13 +19,12 @@ const Forecast = (props) => {
       .then((response) => response.json())
       .then((result) => {
         const newForecastArray = [];
-        for (let i = 6; i <= 38; i += 8) {
+        for (let i = 2; i <= 38; i += 8) {
           newForecastArray.push(result.list[i]);
         }
         setForecast(result);
         setForecastArray(newForecastArray);
         props.setTrigger(true);
-        console.log(newForecastArray);
         console.log(result);
       });
   };
@@ -43,7 +42,14 @@ const Forecast = (props) => {
       <div className="forecast-wrapper">
         {forecastArray.length ? (
           forecastArray.map((item, index) => {
-            return <ForecastItem key={index} switchTemp={temp} item={item} />;
+            return (
+              <ForecastItem
+                key={index}
+                weatherConditions={props.weatherConditions}
+                switchTemp={temp}
+                item={item}
+              />
+            );
           })
         ) : (
           <p>There are no items</p>

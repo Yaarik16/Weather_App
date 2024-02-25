@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import sunicon from "../../icons/night.svg";
 import "./../Weather/Weather.css";
 
 const SearchWeather = (props) => {
@@ -18,22 +17,49 @@ const SearchWeather = (props) => {
       "Saturday",
     ];
     setDay(daysOfWeek[date.getDay()]);
-    setDayTime(date.toLocaleTimeString());
+    setDayTime(
+      date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        second: "numeric",
+        minute: "numeric",
+        hour12: true,
+      })
+    );
   }
   setInterval(time, 1000);
+
+  const dateString = props.allWeather.dt;
+  const date = new Date(dateString);
+  const options = { month: "short", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+
   return (
     <>
-      <div className="temperature-container">
+      <div
+        className={
+          props.allWeather.main === undefined
+            ? "temperature-container-off"
+            : "temperature-container"
+        }
+      >
         {props.allWeather.main === undefined ? null : (
           <>
             <div className="weather-icon">
-              <img src={sunicon} alt="weather-icon" />
+              <img
+                src={`../../icons/${props.allWeather.weather[0].icon}.png`}
+                alt="weather-icon"
+                draggable="false"
+              />
             </div>
             <div className="temperature">
-              <p>{Math.round(props.allWeather.main.temp)}°C</p>
-              <p className="city-time">
-                {day}, <span>{dayTime}</span>
+              <p>
+                {Math.round(props.allWeather.main.temp)}°C /{" "}
+                {Math.round(props.allWeather.main.temp * 1.8 + 32)}°F
               </p>
+              <p></p>
+              <div className="city-time">
+                {day}, {formattedDate}, <span>{dayTime}</span>
+              </div>
             </div>
           </>
         )}

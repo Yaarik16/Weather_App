@@ -1,5 +1,4 @@
 import React from "react";
-import sunicon from "../../icons/night.svg";
 import "./Forecast.css";
 
 const ForecastItem = (props) => {
@@ -19,19 +18,24 @@ const ForecastItem = (props) => {
       <img
         className="forecast-item-icon"
         alt="weather-icon"
-        src={sunicon}
+        src={`../../icons/${props.item.weather[0].icon}.png`}
+        draggable="false"
       ></img>
       <div className="forecast-item-temp">
         {props.switchTemp
-          ? farenheitDayTemp.toFixed(2) +
+          ? Math.floor(farenheitDayTemp) +
             "°F" +
+            " " +
             "/" +
-            farenheitDayFeelsLikeTemp.toFixed(2) +
+            " " +
+            Math.floor(farenheitDayFeelsLikeTemp) +
             "°F"
-          : celsiusDayTemp.toFixed(2) +
+          : Math.floor(celsiusDayTemp) +
             "°C" +
+            " " +
             "/" +
-            celsiusDayFeelsLikeTemp.toFixed(2) +
+            " " +
+            Math.floor(celsiusDayFeelsLikeTemp) +
             "°C"}
       </div>
     </div>
