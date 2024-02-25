@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Forecast.css";
 import ForecastItem from "./ForecastItem";
 
@@ -7,7 +7,7 @@ const Forecast = (props) => {
   const [forecastArray, setForecastArray] = useState([]);
   const [temp, setTemp] = useState(false);
 
-  const forecastPressed = () => {
+  useEffect(() => {
     // Forecast
     fetch(
       `${props.api.base}forecast?lat=${
@@ -24,12 +24,11 @@ const Forecast = (props) => {
         }
         setForecast(result);
         setForecastArray(newForecastArray);
-        props.setTrigger(true);
         console.log(result);
       });
-  };
+  }, [props]);
 
-  return props.trigger ? (
+  return (
     <div className="forecast">
       <div className="forecast-top-panel">
         <div className="forecast-title">Week Forecast</div>
@@ -66,12 +65,6 @@ const Forecast = (props) => {
           Yaroslav Dimbrovskyi
         </a>
       </div>
-    </div>
-  ) : (
-    <div className="forecast-btn-wrapper">
-      <button className="forecast-btn" onClick={forecastPressed}>
-        Load Week Forecast
-      </button>
     </div>
   );
 };

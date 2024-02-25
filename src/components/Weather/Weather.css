@@ -45,8 +45,26 @@
   background-color: #ffffff;
 }
 .search-icon {
-  height: 30px;
-  width: 20px;
+  height: 35px;
+  width: 25px;
+}
+.search-form-off {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 70px 0 -100px 0;
+}
+.search-input-off {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 28px;
+  width: 450px;
+  height: 70px;
+  text-align: center;
+}
+.search-btn-off {
+  display: none;
 }
 .temperature-container {
   display: flex;
@@ -104,10 +122,10 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  flex: 0 1 80%;
+  width: 700px;
   background-color: #f6f6f8;
   padding: 30px 25px 15px 25px;
-  font-size: 35px;
+  font-size: 24px;
 }
 .forecast-container-off-wrapper {
   display: flex;
@@ -116,14 +134,18 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  flex: 0 1 80%;
+  flex: 0 1 100%;
   background-color: #f6f6f8;
   padding: 30px 25px 15px 25px;
   font-size: 35px;
 }
 .forecast-container-off-wrapper img {
-  width: 80%;
-  height: 80%;
+  width: 200px;
+  height: 200px;
+}
+.forecast-container-off-wrapper span {
+  font-size: 50px;
+  font-weight: 500;
 }
 .forecast-container .week-forecast {
   display: flex;

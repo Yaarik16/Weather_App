@@ -28,8 +28,7 @@ const SearchWeather = (props) => {
   }
   setInterval(time, 1000);
 
-  const dateString = props.allWeather.dt;
-  const date = new Date(dateString);
+  const date = new Date();
   const options = { month: "short", day: "numeric" };
   const formattedDate = date.toLocaleDateString("en-US", options);
 
