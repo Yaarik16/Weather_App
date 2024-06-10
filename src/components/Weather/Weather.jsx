@@ -17,7 +17,7 @@ const Weather = () => {
 
   const searchPressed = () => {
     if (search === "") {
-      alert(`You can't submit an empty field. Please type the city name!`);
+      alert(`You can't submit an empty field. Please type the city name`);
     }
     //Weather
     fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
@@ -42,7 +42,7 @@ const Weather = () => {
         <>
           <div className="forecast-container-off-wrapper">
             <img src={logo} draggable="false" alt="" />
-            <span>ExactWeather.com</span>
+            <span>ExactWeather.com</span>com
             <form className="search-form-off" onSubmit={handleSubmit}>
               <input
                 className="search-input-off"
@@ -62,7 +62,7 @@ const Weather = () => {
             <div className="forecast-container-off">
               ExactWeather.com is your premier destination for accurate and
               reliable weather forecasts, providing you with the essential
-              information you need to plan your day and week.
+              information you need to plan your day or week.
             </div>
           </div>
         </>
