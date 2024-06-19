@@ -45,41 +45,6 @@
   cursor: pointer;
   background-color: #ffffff;
 }
-.search-icon {
-  height: 35px;
-  width: 25px;
-}
-.search-form-off {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 70px 0 -100px 0;
-}
-.search-input-off {
-  border: 1px solid rgb(223, 223, 223);
-  border-radius: 10px;
-  padding: 5px;
-  font-size: 28px;
-  width: 450px;
-  height: 70px;
-  text-align: center;
-}
-.search-btn-off {
-  display: none;
-}
-.temperature-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex: 0 1 50%;
-  border-bottom: 1px solid rgba(216, 208, 208, 0.589);
-}
-.temperature-confainer-off {
-  display: none;
-  border: none;
-}
-
 .temperature-container .weather-icon img {
   width: 175px;
 }
@@ -110,6 +75,37 @@
   font-size: 40px;
   margin: 0;
   padding: 0;
+}
+.search-icon {
+  height: 35px;
+  width: 25px;
+}
+.search-form-off {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 70px 0 -100px 0;
+}
+.search-input-off {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 28px;
+  width: 450px;
+  height: 70px;
+  text-align: center;
+}
+.search-btn-off {
+  display: none;
+}
+
+.temperature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 0 1 50%;
+  border-bottom: 1px solid rgba(216, 208, 208, 0.589);
 }
 .forecast-container {
   display: flex;
@@ -158,7 +154,41 @@
   width: 100%;
 }
 
-@media (max-width:1400px) {}
+@media (max-width:1400px) {
+  .temperature-container .weather-icon img {
+    margin: -40px 0 0 0;
+    width: 130px;
+    height: 120px;
+  }
+  .temperature-container .temperature {
+    font-size: 30px;
+    margin: -30px 0 0 0;
+  }
+  .temperature-container .city-time {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
+  .temperature-container .city-time span {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+  }
+  .search-description {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 20%;
+    font-size: 20px;
+  }
+  .search-description .clouds {
+    font-size: 20px;
+  }
+  .search-description .city-name {
+    font-size: 30px;
+    margin: -30px 0 0 0;
+    padding: 0;
+  }
+}
 
 @media(max-width:992px) {
   .forecast-container-off{

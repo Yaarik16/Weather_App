@@ -9,7 +9,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: 100%;
-  margin: 0 15px 0 0;
+  margin: 0 0 0 0;
 }
 .forecast-container .day-title {
   font-size: 30px;
@@ -149,3 +149,76 @@
 .forecast-container .day-item-wind p {
   font-size: 24px;
 }
+
+@media (max-width:1400px) {
+  .forecast-container .day-hightlights {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 65%;
+    height: 100%;
+  }
+  .forecast-container .day-item-sun{
+    flex: 0 1 40%;
+    height: 40%;
+    margin: 10px;
+  }
+  .forecast-container .day-item-sun p {
+    font-size: 20px;
+  }
+  .forecast-container .day-item-sun p span {
+    font-size: 20px;
+  }
+  .forecast-container .sun-container {
+    margin: 15px 0;
+  }
+  .forecast-container .sun-container img {
+    width: 50px;
+    height: 50px;
+  }
+  .forecast-container .day-item-pressure{
+    flex: 0 1 40%;
+    height: 40%;
+    margin: 10px;
+  }
+  .forecast-container .day-item-pressure img {
+    width: 100px;
+    height: 100px;
+    margin: 0 0 15px 0;
+  }
+  .forecast-container .day-item-pressure p {
+    font-size: 20px;
+  }
+  .forecast-container .day-item-pressure p span {
+    font-size: 20px;
+  }
+  .forecast-container .day-item-humidity{
+    flex: 0 1 40%;
+    height: 40%;
+    margin: 10px;
+  }
+  .forecast-container .day-item-humidity img {
+    width: 100px;
+    height: 100px;
+    margin: 0 0 15px 0;
+  }
+  .forecast-container .day-item-humidity p {
+    font-size: 20px;
+  }
+  .forecast-container .day-item-wind{
+    flex: 0 1 40%;
+    height: 40%;
+    margin: 10px;
+  }
+  .forecast-container .day-item-wind img {
+    width: 100px;
+    height: 100px;
+    margin: 0 0 15px 0;
+  }
+  .forecast-container .day-item-wind p {
+    font-size: 20px;
+  }
+}
+
+@media(max-width:992px) {}
+
+@media (max-width:767px) {}

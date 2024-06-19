@@ -42,7 +42,7 @@ const Weather = () => {
         <>
           <div className="forecast-container-off-wrapper">
             <img src={logo} draggable="false" alt="" />
-            <span>ExactWeather.com</span>com
+            <span>ExactWeather.com</span>
             <form className="search-form-off" onSubmit={handleSubmit}>
               <input
                 className="search-input-off"
